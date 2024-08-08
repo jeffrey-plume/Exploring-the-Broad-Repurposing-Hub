@@ -1,4 +1,4 @@
-# Project Title – Predicting Drug Mechanism of Action using Chemical Fingerprinting
+# Predicting Drug Mechanism of Action and Targets using Chemical Fingerprinting
 
 ## Introduction
 
