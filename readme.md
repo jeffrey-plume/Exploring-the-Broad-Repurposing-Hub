@@ -245,7 +245,7 @@ fingerprints.head()
 
 ### The Broad Repurposing Hub 
 
-he [Broad Drug Repurposing Hub is a comprehensive repository that contains detailed profiles of FDA-approved drugs, clinical candidates, and pre-clinical experimental compounds. Each compound is annotated with a single mechanism of action (MOA) and known protein targets. To ensure that the model was adequately powered, MOA classeand protein targets with fewer than twenty observations were excluded from the analysid.
+The [Broad Drug Repurposing Hub is a comprehensive repository that contains detailed profiles of FDA-approved drugs, clinical candidates, and pre-clinical experimental compounds. Each compound is annotated with a single mechanism of action (MOA) and known protein targets. To ensure that the model was adequately powered, MOA classeand protein targets with fewer than twenty observations were excluded from the analysis.
 
 
 ```python
@@ -634,17 +634,13 @@ Unsupervised k-nearest neighbor (k-NN) clustering was applied to the top MOA sub
 
 ### Support Vector Classifier
 
+Support Vector Classifier (SVC) modeling was applied to the data set using a one-vs-rest strategy. This approach manages multi-class classification problems by utilizing binary classifiers. It works by fitting one classifier per class, where each classifier is trained to distinguish that class from all other classes.
 
-Support Vector Classifier (SVC) modeling was applied to the data set using a one-vs-rest strategy. This approach manages multi-class classification problems by utilizing binary classifiers. It works by fitting one classifier per class, where each classifier is trained to distinguish that class from all other classe1.
-
-The data were split into 70% for training and 30% for testing. To evaluate the model's performance, ROC curves and AUC values were calculated individually for each class. Additionally, a micro-average ROC and AUC were calculated to summarize the overall performance of the model across all class.se
+The data were split into 70% for training and 30% for testing. To evaluate the model's performance, ROC curves and AUC values were calculated individually for each class. Additionally, a micro-average ROC and AUC were calculated to summarize the overall performance of the model across all classes
 
 ### Metric of Assessment
 
-Area Under the Receiver Operating Characteristic Curve (AUROC) was chosen as the appropriate method for evaluating the model.  Unlike accuracy, which depends on a specific threshold for classification, AUROC evaluates the model's performance across all possible classification thresholds. This provides a more comprehensive assessment of the model's ability to distinguish between classes, irrespective of the chosen decision threshold.  This is extremely valuable for multiclass data where there are many imbalanced clas.
-s.
-
-
+Area Under the Receiver Operating Characteristic Curve (AUROC) was chosen as the appropriate method for evaluating the model.  Unlike accuracy, which depends on a specific threshold for classification, AUROC evaluates the model's performance across all possible classification thresholds. This provides a more comprehensive assessment of the model's ability to distinguish between classes, irrespective of the chosen decision threshold.  This is extremely valuable for multiclass data where there are many imbalanced classes.
 
 ## Results
 
@@ -720,7 +716,6 @@ Clustering of compounds by Chemical Fingerprints of the top 10 mechansims.  Labe
 Support Vector Machine classification modeling was applied to the test data set to predict mechanism of action.
 
 AUROC (Area Under the Receiver Operating Characteristic Curve) was used as the preferred method to evaluate the model. An aggregate ROC curve was produced using micro-averaged One-vs-Rest strategy. ROC curves for each of the MOA classes and the micro-averaged values are shown in figure 4. AUROC varied significantly depending on the MOA, ranging from 0.374 to 0.948.  Overall, the model exhibited strong predictive performance with a composite micro-averaged AUROC of 0.88.
-
 
 
 
@@ -1132,22 +1127,19 @@ print(f"Classification Report:\n{classification_report(confidence.actual, confid
 ## Conclusions
 
 
-This study focused on developing a support vector machine (SVM) classifier using PubChem fingerprints to predict drug mechanisms of action (MOA) within the Broad Repurposing dataset. Despite the straightforward concept, few publications address this specific question directly.  The Dialogue on Reverse Engineering Assessment and Methods (DREAM) challenges, which are crowdsourced competitions to solve real world problems using data science, have proposed similar questions multiple times. For example, the IDG-DREAM Challenge challenged participants to predict drug targets from chemical fingerprints, but data were limited to kinase inhibitors, excluding the broader drug classes considered hee2. The AZ-DREAM Challenge used chemical fingerprints to predict drug synergy when a drug was paired with another compound of a known drug class.  The PANACEA DREAM Challenge asked participants to predict the same drug classes used here, but with gene expression and cell viability data instead of chemical fingerprins.3
-.
+This study focused on developing a support vector machine (SVM) classifier using PubChem fingerprints to predict drug mechanisms of action (MOA) within the Broad Repurposing dataset. Despite the straightforward concept, few publications address this specific question directly.  The Dialogue on Reverse Engineering Assessment and Methods (DREAM) challenges, which are crowdsourced competitions to solve real world problems using data science, have proposed similar questions multiple times. For example, the IDG-DREAM Challenge challenged participants to predict drug targets from chemical fingerprints, but data were limited to kinase inhibitors, excluding the broader drug classes considered hee2. The AZ-DREAM Challenge used chemical fingerprints to predict drug synergy when a drug was paired with another compound of a known drug class.  The PANACEA DREAM Challenge asked participants to predict the same drug classes used here, but with gene expression and cell viability data instead of chemical fingerprints.
 
-One unreviewed publication that used chemical fingerprints to predict drug MOAs using the Broad Repurposing Hub found no predictive value in chemical fingerprinting (AUROC = 0.47 and 0.43), identifying gene dependency metrics as stronger predictor12. In contrast, the model developed in this study showed strong predictive value (AUROC = 0.89). Possible explanations for these discrepancies include selection bias, as this study excluded MOA classes with fewer than twenty observations, potentially explaining the performance difference
-s.
+One unreviewed publication that used chemical fingerprints to predict drug MOAs using the Broad Repurposing Hub found no predictive value in chemical fingerprinting (AUROC = 0.47 and 0.43), identifying gene dependency metrics as stronger predictor12. In contrast, the model developed in this study showed strong predictive value (AUROC = 0.89). Possible explanations for these discrepancies include selection bias, as this study excluded MOA classes with fewer than twenty observations, potentially explaining the performance differences.
+
 ### Novel Targets 
 
 
-In June 2022, researchers at Gunung Leuser National Park in Sumatra, Indonesia, made a groundbreaking observation by recording a Sumatran orangutan named Rakus self-medicating with a paste made from Fibraurea tinctoria to heal a large wound on his cheek. This marks the first documented instance of a wild animal using a medicinal plant to treat an injry4. Fibraurea tinctoria, also known as Akar Kuning, is used in Indonesian folk medicine for treating malaria and diabetes. However, no major clinical trials have been conducted to verify these uses. Limited research has shown that the primary alkaloids, called berberines, exhibit anti-inflammatory and antimicrobial properties, but little else is known about the plant's full potenl.i5
-.
+In June 2022, researchers at Gunung Leuser National Park in Sumatra, Indonesia, made a groundbreaking observation by recording a Sumatran orangutan named Rakus self-medicating with a paste made from Fibraurea tinctoria to heal a large wound on his cheek. This marks the first documented instance of a wild animal using a medicinal plant to treat an injry4. Fibraurea tinctoria, also known as Akar Kuning, is used in Indonesian folk medicine for treating malaria and diabetes. However, no major clinical trials have been conducted to verify these uses. Limited research has shown that the primary alkaloids, called berberines, exhibit anti-inflammatory and antimicrobial properties, but little else is known about the plant's full potential.
+
 
 When applying the model developed here to thirteen compounds foun nd iPubChem [AID 311859](https://pubchem.ncbi.nlm.nih.gov/bioassay/3119)ia, Makisterone A, and hormone usually found in insects, aligned modestly with anti-inflammatory compoun and compounds that target CDK1et. For researchers interested in studying the medicinal properties of Fibraurea tinctoria, experiments like this could save scientist valuable resources.  Instead of screening all thirteen compounds, researchers can focus on the molecules, such as Makisterone A, that are most likely to be successful. While little is known about the effects of Makisterone A, it seems pausible that this compound may play a role in the medicinal effects observed when Rakus applied the Fibraurea tinctoria paste to his fwound.
-n
-d.
 
-In conclusion, this study demonstrates the potential of computational chemistry in early-stage drug development, showing that chemical fingerprints can predict certain drug MOAs. This study presents a promising approach to drug discovery using computational methods to identify new therapies and novel applications for exis drugs.1859)
+In conclusion, this study demonstrates the potential of computational chemistry in early-stage drug development, showing that chemical fingerprints can predict certain drug MOAs. This study presents a promising approach to drug discovery using computational methods to identify new therapies and novel applications for existing drugs.
 
 
 ```python
