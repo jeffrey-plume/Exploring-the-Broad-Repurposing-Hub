@@ -1,13 +1,20 @@
 # Project Title – Predicting Drug Mechanism of Action using Chemical Fingerprinting
 
-## IntroductionComputational chemistry is an emerging field in drug discovery that leverages advanced computational methods to better understand how compounds interact with biological systems. This paper will address some of the limitations of the drug discovery process and how computational chemistry can be used to overcome them. Using data from the Broad Repurposing Hub, the applicability of these techniques will be demonstrated by developing a predictive model to classify drugs by their mechanism of action (MOA) using structural data from the National Library of Medicine. Lastly, the model will be applied to a novel set of experimental compounds to uncover new insights into their mechanisms of action.
+## Introduction
 
-.## Similar Structure, Similar FunctionComputational chemistry has emerged as a powerful tool for researchers to identify new drug candidates and new uses for existing drugs. The principle of “similar structure, similar function” postulates that drugs with similar chemical structures will exhibit similar biological activities. Leveraging this principle, scientists aim to identify quantitative structure-activity relationships (QSAR). QSAR models establish associations between chemical structures and their corresponding biological responses.
+Computational chemistry is an emerging field in drug discovery that leverages advanced computational methods to better understand how compounds interact with biological systems. This paper will address some of the limitations of the drug discovery process and how computational chemistry can be used to overcome them. Using data from the Broad Repurposing Hub, the applicability of these techniques will be demonstrated by developing a predictive model to classify drugs by their mechanism of action (MOA) using structural data from the National Library of Medicine. Lastly, the model will be applied to a novel set of experimental compounds to uncover new insights into their mechanisms of action.
+
+## Similar Structure, Similar Function
+
+Computational chemistry has emerged as a powerful tool for researchers to identify new drug candidates and new uses for existing drugs. The principle of “similar structure, similar function” postulates that drugs with similar chemical structures will exhibit similar biological activities. Leveraging this principle, scientists aim to identify quantitative structure-activity relationships (QSAR). QSAR models establish associations between chemical structures and their corresponding biological responses.
 By analyzing these relationships, researchers can develop robust models capable of predicting the biological effects of compounds that have not yet been evaluated in the lab. These predictive models are invaluable in the early stages of drug discovery, as they allow scientists to screen vast libraries of compounds efficiently, focusing experimental efforts on the most promising candidates. The integration of computational chemistry and QSAR models accelerates the drug discovery process, reduces costs, and enhances the likelihood of finding effective therapies.
 
-In this study, I will use chemical fingerprinting trained on the Broad Repurposing data set to predict drug mechanisms of act and protein targetsion. The resulting model will be applied to compounds found in the Fibraurea tinctoria plant to explore potential therapeutic uses.
-
-
+In this study, I will use chemical fingerprinting trained on the Broad Repurposing data set to predict drug mechanisms of act and protein targetsion. The resulting model will be applied to compounds found in the Fibraurea tinctoria plant to explore potential therapeutic uses.
+
+
+
+
+
 
 
 
@@ -50,7 +57,8 @@ from getFPfromCID import getFPfromCID
 
 ### PubChem Fingerprints
 
-PubChem Chemical Fingerprints were obtained through the [PUG-REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) API provided by the National Library of Medicine, using the PubChem Compound IDs from the Broad data set. These fingerprints consist of 881-bit binary vectors, where each bit corresponds to the presence or absence of a specific chemical motif. To enhance the model's efficiency and accuracy, zero variance bits were excluded, resulting in 695 unique predictors.
+PubChem Chemical Fingerprints were obtained through the [PUG-REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) API provided by the National Library of Medicine, using the PubChem Compound IDs from the Broad data set. These fingerprints consist of 881-bit binary vectors, where each bit corresponds to the presence or absence of a specific chemical motif. To enhance the model's efficiency and accuracy, zero variance bits were excluded, resulting in 695 unique predictors.
+
 
 
 ```python
@@ -235,7 +243,8 @@ fingerprints.head()
 
 
 
-### The Broad Repurposing Hub 
+### The Broad Repurposing Hub 
+
 he [Broad Drug Repurposing Hub is a comprehensive repository that contains detailed profiles of FDA-approved drugs, clinical candidates, and pre-clinical experimental compounds. Each compound is annotated with a single mechanism of action (MOA) and known protein targets. To ensure that the model was adequately powered, MOA classeand protein targets with fewer than twenty observations were excluded from the analysid.
 
 
@@ -624,13 +633,17 @@ plt.tick_params(axis='x', labelrotation=90, labelsize = 8)
 Unsupervised k-nearest neighbor (k-NN) clustering was applied to the top MOA subclasses to explore patterns within the data. To visualize the clustering results, the predictors were reduced to two principal components, which served as plot coordinates.
 
 ### Support Vector Classifier
-
-Support Vector Classifier (SVC) modeling was applied to the data set using a one-vs-rest strategy. This approach manages multi-class classification problems by utilizing binary classifiers. It works by fitting one classifier per class, where each classifier is trained to distinguish that class from all other classe1.
+
+
+Support Vector Classifier (SVC) modeling was applied to the data set using a one-vs-rest strategy. This approach manages multi-class classification problems by utilizing binary classifiers. It works by fitting one classifier per class, where each classifier is trained to distinguish that class from all other classe1.
+
 The data were split into 70% for training and 30% for testing. To evaluate the model's performance, ROC curves and AUC values were calculated individually for each class. Additionally, a micro-average ROC and AUC were calculated to summarize the overall performance of the model across all class.se
 
-### Metric of Assessment
+### Metric of Assessment
+
 Area Under the Receiver Operating Characteristic Curve (AUROC) was chosen as the appropriate method for evaluating the model.  Unlike accuracy, which depends on a specific threshold for classification, AUROC evaluates the model's performance across all possible classification thresholds. This provides a more comprehensive assessment of the model's ability to distinguish between classes, irrespective of the chosen decision threshold.  This is extremely valuable for multiclass data where there are many imbalanced clas.
-s.
+s.
+
 
 
 ## Results
@@ -702,9 +715,12 @@ Clustering of compounds by Chemical Fingerprints of the top 10 mechansims.  Labe
 
 
 ### Mechanism of Action Classification
-
-Support Vector Machine classification modeling was applied to the test data set to predict mechanism of action.
-AUROC (Area Under the Receiver Operating Characteristic Curve) was used as the preferred method to evaluate the model. An aggregate ROC curve was produced using micro-averaged One-vs-Rest strategy. ROC curves for each of the MOA classes and the micro-averaged values are shown in figure 4. AUROC varied significantly depending on the MOA, ranging from 0.374 to 0.948.  Overall, the model exhibited strong predictive performance with a composite micro-averaged AUROC of 0.88.
+
+
+Support Vector Machine classification modeling was applied to the test data set to predict mechanism of action.
+
+AUROC (Area Under the Receiver Operating Characteristic Curve) was used as the preferred method to evaluate the model. An aggregate ROC curve was produced using micro-averaged One-vs-Rest strategy. ROC curves for each of the MOA classes and the micro-averaged values are shown in figure 4. AUROC varied significantly depending on the MOA, ranging from 0.374 to 0.948.  Overall, the model exhibited strong predictive performance with a composite micro-averaged AUROC of 0.88.
+
 
 
 
@@ -1114,18 +1130,23 @@ print(f"Classification Report:\n{classification_report(confidence.actual, confid
     
 
 ## Conclusions
-
+
+
 This study focused on developing a support vector machine (SVM) classifier using PubChem fingerprints to predict drug mechanisms of action (MOA) within the Broad Repurposing dataset. Despite the straightforward concept, few publications address this specific question directly.  The Dialogue on Reverse Engineering Assessment and Methods (DREAM) challenges, which are crowdsourced competitions to solve real world problems using data science, have proposed similar questions multiple times. For example, the IDG-DREAM Challenge challenged participants to predict drug targets from chemical fingerprints, but data were limited to kinase inhibitors, excluding the broader drug classes considered hee2. The AZ-DREAM Challenge used chemical fingerprints to predict drug synergy when a drug was paired with another compound of a known drug class.  The PANACEA DREAM Challenge asked participants to predict the same drug classes used here, but with gene expression and cell viability data instead of chemical fingerprins.3
-.
+.
+
 One unreviewed publication that used chemical fingerprints to predict drug MOAs using the Broad Repurposing Hub found no predictive value in chemical fingerprinting (AUROC = 0.47 and 0.43), identifying gene dependency metrics as stronger predictor12. In contrast, the model developed in this study showed strong predictive value (AUROC = 0.89). Possible explanations for these discrepancies include selection bias, as this study excluded MOA classes with fewer than twenty observations, potentially explaining the performance difference
 s.
 ### Novel Targets 
-
+
+
 In June 2022, researchers at Gunung Leuser National Park in Sumatra, Indonesia, made a groundbreaking observation by recording a Sumatran orangutan named Rakus self-medicating with a paste made from Fibraurea tinctoria to heal a large wound on his cheek. This marks the first documented instance of a wild animal using a medicinal plant to treat an injry4. Fibraurea tinctoria, also known as Akar Kuning, is used in Indonesian folk medicine for treating malaria and diabetes. However, no major clinical trials have been conducted to verify these uses. Limited research has shown that the primary alkaloids, called berberines, exhibit anti-inflammatory and antimicrobial properties, but little else is known about the plant's full potenl.i5
-.
+.
+
 When applying the model developed here to thirteen compounds foun nd iPubChem [AID 311859](https://pubchem.ncbi.nlm.nih.gov/bioassay/3119)ia, Makisterone A, and hormone usually found in insects, aligned modestly with anti-inflammatory compoun and compounds that target CDK1et. For researchers interested in studying the medicinal properties of Fibraurea tinctoria, experiments like this could save scientist valuable resources.  Instead of screening all thirteen compounds, researchers can focus on the molecules, such as Makisterone A, that are most likely to be successful. While little is known about the effects of Makisterone A, it seems pausible that this compound may play a role in the medicinal effects observed when Rakus applied the Fibraurea tinctoria paste to his fwound.
 n
-d.
+d.
+
 In conclusion, this study demonstrates the potential of computational chemistry in early-stage drug development, showing that chemical fingerprints can predict certain drug MOAs. This study presents a promising approach to drug discovery using computational methods to identify new therapies and novel applications for exis drugs.1859)
 
 
@@ -1614,18 +1635,30 @@ targetpredDF.sort_values(by = 12312690, ascending = False).head()
 
 ### References
 
-1.	Congressional Budget Office. (2021). Research and Development in the Pharmaceutical Industry. Retrieved from https://www.cbo.gov/publication/57126
-2.	Cichońska A, Ravikumar B, Allaway RJ, Wan F, Park S, Isayev O, Li S, Mason M, Lamb A, Tanoli Z, Jeon M, Kim S, Popova M, Capuzzi S, Zeng J, Dang K, Koytiger G, Kang J, Wells CI, Willson TM; IDG-DREAM Drug-Kinase Binding Prediction Challenge Consortium; Oprea TI, Schlessinger A, Drewry DH, Stolovitzky G, Wennerberg K, Guinney J, Aittokallio T. Crowdsourced mapping of unexplored target space of kinase inhibitors. Nat Commun. 2021 Jun 3;12(1):3307. doi: 10.1038/s41467-021-23165-1. PMID: 34083538; PMCID: PMC8175708.
-3.	Douglass EF Jr, Allaway RJ, Szalai B, Wang W, Tian T, Fernández-Torras A, Realubit R, Karan C, Zheng S, Pessia A, Tanoli Z, Jafari M, Wan F, Li S, Xiong Y, Duran-Frigola M, Bertoni M, Badia-I-Mompel P, Mateo L, Guitart-Pla O, Chung V; DREAM CTD-squared Pancancer Drug Activity Challenge Consortium; Tang J, Zeng J, Aloy P, Saez-Rodriguez J, Guinney J, Gerhard DS, Califano A. A community challenge for a pancancer drug mechanism of action inference from perturbational profile data. Cell Rep Med. 2022 Jan 18;3(1):100492. doi: 10.1016/j.xcrm.2021.100492. PMID: 35106508; PMCID: PMC8784774.
-4.	Laumer IB, Rahman A, Rahmaeti T, Azhari U, Hermansyah, Atmoko SSU, Schuppli C. Active self-treatment of a facial wound with a biologically active plant by a male Sumatran orangutan. Sci Rep. 2024 May 2;14(1):8932. doi: 10.1038/s41598-024-58988-7. PMID: 38698007; PMCID: PMC11066025.
-5.	Liu M, Srivastava G, Ramanujam J, Brylinski M. Augmented drug combination dataset to improve the performance of machine learning models predicting synergistic anticancer effects. Reint]. 2023 Oct 28:rs.3.rs-3481858. doi: 10.21203/rs.3.rs-3481858/v1. Update in: Sci Rep. 2024 Jan 18;14(1):1668. doi: 10.1038/s41598-024-51940-9. PMID: 37961281; PMCID: PMC10635365.
-6.	Mohs RC, Greig NH. Drug discovery and development: Role of basic biological research. Alzheimers Dement (N Y). 2017 Nov 11;3(4):651-657. doi: 10.1016/j.trci.2017.10.005. PMID: 29255791; PMCID: PMC5725284.
-7.	Patten JJ, Keiser PT, Gysi D, Menichetti G, Mori H, Donahue CJ, Gan X, do Valle I, Geoghegan-Barek K, Anantpadma M, Boytz R, Berrigan JL, Hulsey-Stubbs S, Ayazika T, O'Leary C, Jalloh S, Wagner F, Ayehunie S, Elledge SJ, Anderson D, Loscalzo J, Zitnik M, Gummuluru S, Namchuk MN, Barabási AL, Davey RA. Identification of druggable host targets needed for SARS-CoV-2 infection by combined pharmacological evaluation and cellular network directed prioritization both in vitro and in vivo. bprint]. 2022 Feb 1:2021.04.20.440626. doi: 10.1101/2021.04.20.440626. Update in: iScience. 2022 Sep 16;25(9):104925. doi: 10.1016/j.isci.2022.104925. PMID: 33907750; PMCID: PMC8077576.
-8.	PubChem. (n.d.). Cytochrome P3A4 inhibitors and other constituents of Fibraurea tinctoria. PubChem Assay ID 311859. Retrieved from https://pubchem.ncbi.nlm.nih.gov/bioassay/311859.
-9.	RECOVERY Collaborative Group; Horby P, Lim WS, Emberson JR, Mafham M, Bell JL, Linsell L, Staplin N, Brightling C, Ustianowski A, Elmahi E, Prudon B, Green C, Felton T, Chadwick D, Rege K, Fegan C, Chappell LC, Faust SN, Jaki T, Jeffery K, Montgomery A, Rowan K, Juszczak E, Baillie JK, Haynes R, Landray MJ. Dexamethasone in Hospitalized Patients with Covid-19. N Engl J Med. 2021 Feb 25;384(8):693-704. doi: 10.1056/NEJMoa2021436. Epub 2020 Jul 17. PMID: 32678530; PMCID: PMC7383595.
-10.	RECOVERY Trial. (2022, June 16). RECOVERY Trial celebrates two-year anniversary of life-saving dexamethasone result. Retrieved from https://www.recoverytrial.net/news/recovery-trial-celebrates-two-year-anniversary-of-life-saving-dexamethasone-result
-11.	Scikit-learn Developers. (n.d.). Plotting ROC curves for multiclass classification. Retrieved from https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html
-12.	Wenyu Wang, Jie Bao, Shuyu Zheng, Shan Huang, Jehad Aldahdooh, Yinyin Wang, Johanna Eriksson, Ziaurrehman Tanoli, Xuepei Zhang, Massimiliano Gaetani, Jing Tang. A gene essentiality signature enables predicting the mechanism of action of drugs. bioRxiv 2022.11.07.514541; doi: https://doi.org/10.1101/2022.11.07.514541
+1.	Congressional Budget Office. (2021). Research and Development in the Pharmaceutical Industry. Retrieved from https://www.cbo.gov/publication/57126
+
+2.	Cichońska A, Ravikumar B, Allaway RJ, Wan F, Park S, Isayev O, Li S, Mason M, Lamb A, Tanoli Z, Jeon M, Kim S, Popova M, Capuzzi S, Zeng J, Dang K, Koytiger G, Kang J, Wells CI, Willson TM; IDG-DREAM Drug-Kinase Binding Prediction Challenge Consortium; Oprea TI, Schlessinger A, Drewry DH, Stolovitzky G, Wennerberg K, Guinney J, Aittokallio T. Crowdsourced mapping of unexplored target space of kinase inhibitors. Nat Commun. 2021 Jun 3;12(1):3307. doi: 10.1038/s41467-021-23165-1. PMID: 34083538; PMCID: PMC8175708.
+
+3.	Douglass EF Jr, Allaway RJ, Szalai B, Wang W, Tian T, Fernández-Torras A, Realubit R, Karan C, Zheng S, Pessia A, Tanoli Z, Jafari M, Wan F, Li S, Xiong Y, Duran-Frigola M, Bertoni M, Badia-I-Mompel P, Mateo L, Guitart-Pla O, Chung V; DREAM CTD-squared Pancancer Drug Activity Challenge Consortium; Tang J, Zeng J, Aloy P, Saez-Rodriguez J, Guinney J, Gerhard DS, Califano A. A community challenge for a pancancer drug mechanism of action inference from perturbational profile data. Cell Rep Med. 2022 Jan 18;3(1):100492. doi: 10.1016/j.xcrm.2021.100492. PMID: 35106508; PMCID: PMC8784774.
+
+4.	Laumer IB, Rahman A, Rahmaeti T, Azhari U, Hermansyah, Atmoko SSU, Schuppli C. Active self-treatment of a facial wound with a biologically active plant by a male Sumatran orangutan. Sci Rep. 2024 May 2;14(1):8932. doi: 10.1038/s41598-024-58988-7. PMID: 38698007; PMCID: PMC11066025.
+
+5.	Liu M, Srivastava G, Ramanujam J, Brylinski M. Augmented drug combination dataset to improve the performance of machine learning models predicting synergistic anticancer effects. Reint]. 2023 Oct 28:rs.3.rs-3481858. doi: 10.21203/rs.3.rs-3481858/v1. Update in: Sci Rep. 2024 Jan 18;14(1):1668. doi: 10.1038/s41598-024-51940-9. PMID: 37961281; PMCID: PMC10635365.
+
+6.	Mohs RC, Greig NH. Drug discovery and development: Role of basic biological research. Alzheimers Dement (N Y). 2017 Nov 11;3(4):651-657. doi: 10.1016/j.trci.2017.10.005. PMID: 29255791; PMCID: PMC5725284.
+
+7.	Patten JJ, Keiser PT, Gysi D, Menichetti G, Mori H, Donahue CJ, Gan X, do Valle I, Geoghegan-Barek K, Anantpadma M, Boytz R, Berrigan JL, Hulsey-Stubbs S, Ayazika T, O'Leary C, Jalloh S, Wagner F, Ayehunie S, Elledge SJ, Anderson D, Loscalzo J, Zitnik M, Gummuluru S, Namchuk MN, Barabási AL, Davey RA. Identification of druggable host targets needed for SARS-CoV-2 infection by combined pharmacological evaluation and cellular network directed prioritization both in vitro and in vivo. bprint]. 2022 Feb 1:2021.04.20.440626. doi: 10.1101/2021.04.20.440626. Update in: iScience. 2022 Sep 16;25(9):104925. doi: 10.1016/j.isci.2022.104925. PMID: 33907750; PMCID: PMC8077576.
+
+8.	PubChem. (n.d.). Cytochrome P3A4 inhibitors and other constituents of Fibraurea tinctoria. PubChem Assay ID 311859. Retrieved from https://pubchem.ncbi.nlm.nih.gov/bioassay/311859.
+
+9.	RECOVERY Collaborative Group; Horby P, Lim WS, Emberson JR, Mafham M, Bell JL, Linsell L, Staplin N, Brightling C, Ustianowski A, Elmahi E, Prudon B, Green C, Felton T, Chadwick D, Rege K, Fegan C, Chappell LC, Faust SN, Jaki T, Jeffery K, Montgomery A, Rowan K, Juszczak E, Baillie JK, Haynes R, Landray MJ. Dexamethasone in Hospitalized Patients with Covid-19. N Engl J Med. 2021 Feb 25;384(8):693-704. doi: 10.1056/NEJMoa2021436. Epub 2020 Jul 17. PMID: 32678530; PMCID: PMC7383595.
+
+10.	RECOVERY Trial. (2022, June 16). RECOVERY Trial celebrates two-year anniversary of life-saving dexamethasone result. Retrieved from https://www.recoverytrial.net/news/recovery-trial-celebrates-two-year-anniversary-of-life-saving-dexamethasone-result
+
+11.	Scikit-learn Developers. (n.d.). Plotting ROC curves for multiclass classification. Retrieved from https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html
+
+12.	Wenyu Wang, Jie Bao, Shuyu Zheng, Shan Huang, Jehad Aldahdooh, Yinyin Wang, Johanna Eriksson, Ziaurrehman Tanoli, Xuepei Zhang, Massimiliano Gaetani, Jing Tang. A gene essentiality signature enables predicting the mechanism of action of drugs. bioRxiv 2022.11.07.514541; doi: https://doi.org/10.1101/2022.11.07.514541
+
 
 
 
